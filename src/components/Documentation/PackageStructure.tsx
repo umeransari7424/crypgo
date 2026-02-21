@@ -30,9 +30,11 @@ export const PackageStructure = () => {
             </div>
             <div className="flex">
               <div className='flex flex-col justify-between gap-2 mt-2'>
-                {Counts.slice(0, 30).map((item) => {
-                  return <p className='text-xl text-white'>|</p>
-                })}
+                {Array.from({ length: 30 }).map((_, index) => (
+                  <p key={index} className="text-xl text-white">
+                    |
+                  </p>
+                ))}
               </div>
               <ul className='ps-5 md:ps-5 list-unstyled'>
                 <li className='py-0'>
@@ -76,9 +78,11 @@ export const PackageStructure = () => {
                           </div>
                           <div className='flex'>
                             <div className='flex flex-col justify-between gap-2 mt-2'>
-                              {Counts.slice(0, 22).map((item) => {
-                                return <p className='text-xl text-white'>|</p>
-                              })}
+                              {Counts.slice(0, 22).map((_, index) => (
+                                <p key={index} className="text-xl text-white">
+                                  |
+                                </p>
+                              ))}
                             </div>
                             <ul className='ps-5 md:ps-12 list-unstyled'>
                               <li className='py-2'>
@@ -94,11 +98,11 @@ export const PackageStructure = () => {
                                 </div>
                                 <div className='flex'>
                                   <div className='flex flex-col justify-between gap-2 mt-2'>
-                                    {Counts.slice(0, 16).map((item) => {
-                                      return (
-                                        <p className='text-xl text-white'>|</p>
-                                      )
-                                    })}
+                                    {Counts.slice(0, 16).map((_, index) => (
+                                      <p key={index} className="text-xl text-white">
+                                        |
+                                      </p>
+                                    ))}
                                   </div>
                                   <ul className='ps-5 md:ps-12 list-unstyled red'>
                                     <li className='py-2'>
@@ -117,17 +121,11 @@ export const PackageStructure = () => {
                                       </div>
                                       <div className='flex'>
                                         <div className='flex flex-col justify-between gap-2 mt-2'>
-                                          {Counts.slice(0, 5).map(
-                                            (item, index) => {
-                                              return (
-                                                <p
-                                                  key={index}
-                                                  className='text-xl text-white'>
-                                                  |
-                                                </p>
-                                              )
-                                            }
-                                          )}
+                                          {Counts.slice(0, 5).map((_, index) => (
+                                            <p key={index} className="text-xl text-white">
+                                              |
+                                            </p>
+                                          ))}
                                         </div>
 
                                         <ul className='ps-5 md:ps-12 list-unstyled'>
@@ -146,15 +144,11 @@ export const PackageStructure = () => {
                                             </div>
                                             <div className='flex'>
                                               <div className='flex flex-col justify-between gap-1 mt-2'>
-                                                {Counts.slice(0, 2).map(
-                                                  (item) => {
-                                                    return (
-                                                      <p className='text-xl text-white'>
-                                                        |
-                                                      </p>
-                                                    )
-                                                  }
-                                                )}
+                                                {Counts.slice(0, 2).map((_, index) => (
+                                                  <p key={index} className="text-xl text-white">
+                                                    |
+                                                  </p>
+                                                ))}
                                               </div>
                                               <ul className='ps-5 md:ps-12 list-unstyled'>
                                                 <li className='py-2'>
@@ -228,13 +222,11 @@ export const PackageStructure = () => {
                                       </div>
                                       <div className='flex'>
                                         <div className='flex flex-col justify-between gap-2 mt-2'>
-                                          {Counts.slice(0, 2).map((item) => {
-                                            return (
-                                              <p className='text-xl text-white'>
-                                                |
-                                              </p>
-                                            )
-                                          })}
+                                          {Counts.slice(0, 2).map((_, index) => (
+                                            <p key={index} className="text-xl text-white">
+                                              |
+                                            </p>
+                                          ))}
                                         </div>
                                         <ul className='ps-5 md:ps-12 list-unstyled'>
                                           <li className='py-2'>
@@ -291,13 +283,11 @@ export const PackageStructure = () => {
                                       </div>
                                       <div className='flex'>
                                         <div className='flex flex-col justify-between gap-2 mt-2'>
-                                          {Counts.slice(0, 1).map((item) => {
-                                            return (
-                                              <p className='text-xl text-white'>
-                                                |
-                                              </p>
-                                            )
-                                          })}
+                                          {Counts.slice(0, 1).map((_, index) => (
+                                            <p key={index} className="text-xl text-white">
+                                              |
+                                            </p>
+                                          ))}
                                         </div>
                                         <ul className='ps-5 md:ps-12 list-unstyled'>
                                           <li className='py-2'>

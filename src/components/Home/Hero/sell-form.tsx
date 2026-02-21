@@ -55,20 +55,23 @@ const SellCrypto = () => {
     ? (formData.price * parseFloat(formData.amount)).toFixed(2)
     : '0.00'
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setLoading(true)
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      toast.success('Crypto purchase successful!')
-      setFormData((prevData) => ({ ...prevData, amount: '' }))
-    } catch (error) {
-      toast.error('An error occurred during the purchase.')
-      console.error(error)
-    } finally {
-      setLoading(false)
-    }
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+
+  if (loading) return
+
+  setLoading(true)
+
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    toast.success('Crypto sold successfully!')
+    setFormData((prevData) => ({ ...prevData, amount: '' }))
+  } catch (error) {
+    toast.error('An error occurred during the sale.')
+  } finally {
+    setLoading(false)
   }
+}
 
   return (
     <div className='max-w-md mx-auto p-4'>
@@ -123,8 +126,12 @@ const SellCrypto = () => {
           <p>Total Price: </p>
           <p>${totalCost}</p>
         </div>
-        <button className='hover:text-darkmode font-medium text-18 bg-transparent w-full border border-primary rounded-lg py-3 text-primary hover:bg-primary'>
-          Sell
+        <button
+          type="submit"
+          disabled={loading}
+          className="hover:text-darkmode font-medium text-18 bg-transparent w-full border border-primary rounded-lg py-3 text-primary hover:bg-primary disabled:opacity-50"
+        >
+          {loading ? "Processing..." : "Sell"}
         </button>
       </form>
     </div>

@@ -11,7 +11,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('')
   const [loader, setLoader] = useState(false)
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!email) {
@@ -39,9 +39,12 @@ const ForgotPassword = () => {
 
       setEmail('')
       setLoader(false)
-    } catch (error: any) {
-      toast.error(error?.response.data)
-      setLoader(false)
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data || 'Something went wrong')
+      } else {
+        toast.error('Something went wrong')
+      }
     }
   }
 

@@ -4,6 +4,19 @@ import { join } from "path";
 
 const postsDirectory = join(process.cwd(), "markdown/Blog");
 
+
+type Post = {
+  slug?: string;
+  content?: string;
+  metadata?: {
+    coverImage?: string | null;
+    [key: string]: unknown;
+  };
+  date?: string;
+  [key: string]: unknown;
+};
+
+
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
@@ -14,13 +27,12 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  type Items = {
-    // [key: string]: string;
-    [key: string]: string | object;
-  };
+  // type Items = {
+  //   // [key: string]: string;
+  //   [key: string]: string | object;
+  // };
 
-  const items: any = {};
-
+const items: Post = {};
   function processImages(content: string) {
     // You can modify this function to handle image processing
     // For example, replace image paths with actual HTML image tags
@@ -55,7 +67,9 @@ export function getAllPosts(fields: string[] = []) {
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .sort((post1, post2) =>
+  String(post1.date ?? "") > String(post2.date ?? "") ? -1 : 1
+);
 
   return posts;
 }

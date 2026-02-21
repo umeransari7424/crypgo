@@ -71,8 +71,13 @@ const ResetPassword = ({ token }: { token: string }) => {
       }
 
       setLoader(false)
-    } catch (error: any) {
-      toast.error(error.response.data)
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data || 'Something went wrong')
+      } else {
+        toast.error('Something went wrong')
+      }
+    } finally {
       setLoader(false)
     }
   }
