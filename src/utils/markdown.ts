@@ -4,7 +4,7 @@ import { join } from "path";
 
 import { Blog } from "@/types/blog";
 
-const postsDirectory = join(process.cwd(), "markdown/Blog");
+const postsDirectory = join(process.cwd(), "markdown/blog");
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
