@@ -16,7 +16,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const items: Record<string, string | any> = {};
+  const items: Record<string, string | number | boolean | null | object> = {};
 
   function processImages(content: string) {
     // You can modify this function to handle image processing

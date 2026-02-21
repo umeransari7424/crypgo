@@ -6,5 +6,5 @@ export type Blog = {
   coverImage?: string;
   date: string;
   content?: string;
-  metadata?: any; // matter's data can be anything, but we can refine it if we know the schema
+  metadata?: Record<string, string | number | boolean | null>;
 };

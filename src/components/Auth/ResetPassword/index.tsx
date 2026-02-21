@@ -33,8 +33,11 @@ const ResetPassword = ({ token }: { token: string }) => {
           })
         }
       } catch (err) {
-        const error = err as any // Since user said NO unknown, and axios errors have complex structures, casting to any then using properties is safer than unknown if we want to avoid unknown.
-        toast.error(error?.response?.data || 'Verification failed')
+        if (axios.isAxiosError(err)) {
+          toast.error(err?.response?.data || 'Verification failed')
+        } else {
+          toast.error('Verification failed')
+        }
         router.push('/forgot-password')
       }
     }
