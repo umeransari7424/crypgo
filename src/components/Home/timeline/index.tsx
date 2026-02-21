@@ -1,12 +1,12 @@
 'use client'
 import Image from 'next/image'
 import { timelineData } from '@/app/api/data'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
+// import { useRef } from 'react'
 
 const TimeLine = () => {
-  const ref = useRef(null)
-  const inView = useInView(ref)
+  // const ref = useRef(null)
+  // const inView = useInView(ref)
 
   // const TopAnimation = {
   //   initial: { y: '-100%', opacity: 0 },

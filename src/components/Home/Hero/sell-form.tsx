@@ -67,6 +67,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     toast.success('Crypto sold successfully!')
     setFormData((prevData) => ({ ...prevData, amount: '' }))
   } catch (error) {
+        console.log(error)
     toast.error('An error occurred during the sale.')
   } finally {
     setLoading(false)

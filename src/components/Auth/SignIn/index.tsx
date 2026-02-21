@@ -8,40 +8,41 @@ import SocialSignIn from '../SocialSignIn'
 import Logo from '@/components/Layout/Header/Logo'
 import Loader from '@/components/Common/Loader'
 
+interface LoginData {
+  email: string
+  password: string
+  checkboxToggle?: boolean
+}
+
 const Signin = () => {
   const router = useRouter()
 
-  const [loginData, setLoginData] = useState({
+  const [loginData, setLoginData] = useState<LoginData>({
     email: '',
     password: '',
     checkboxToggle: false,
   })
   const [loading, setLoading] = useState(false)
 
-  const loginUser = (e: any) => {
+  const loginUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
     setLoading(true)
-    signIn('credentials', { ...loginData, redirect: false })
-      .then((callback) => {
-        if (callback?.error) {
-          toast.error(callback?.error)
-          console.log(callback?.error)
-          setLoading(false)
-          return
-        }
 
-        if (callback?.ok && !callback?.error) {
-          toast.success('Login successful')
-          setLoading(false)
-          router.push('/')
-        }
-      })
-      .catch((err) => {
-        setLoading(false)
-        console.log(err.message)
-        toast.error(err.message)
-      })
+    try {
+      const callback = await signIn('credentials', { ...loginData, redirect: false })
+      if (callback?.error) {
+        toast.error(callback.error)
+        console.error(callback.error)
+      } else if (callback?.ok) {
+        toast.success('Login successful')
+        router.push('/')
+      }
+    } catch (err: any) {
+      toast.error(err.message || 'Login failed')
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -58,30 +59,31 @@ const Signin = () => {
         </span>
       </span>
 
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={loginUser}>
         <div className='mb-[22px]'>
           <input
             type='email'
             placeholder='Email'
+            value={loginData.email}
             onChange={(e) =>
               setLoginData({ ...loginData, email: e.target.value })
             }
-            className='w-full rounded-md border border-dark_border/60 border-solid bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary'
+            className='w-full rounded-md border border-dark_border/60 bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary'
           />
         </div>
         <div className='mb-[22px]'>
           <input
             type='password'
             placeholder='Password'
+            value={loginData.password}
             onChange={(e) =>
               setLoginData({ ...loginData, password: e.target.value })
             }
-            className='w-full rounded-md border border-dark_border/60 border-solid bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary'
+            className='w-full rounded-md border border-dark_border/60 bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary'
           />
         </div>
         <div className='mb-9'>
           <button
-            onClick={loginUser}
             type='submit'
             className='bg-primary w-full py-3 rounded-lg text-18 font-medium border border-primary hover:text-primary hover:bg-transparent'>
             Sign In {loading && <Loader />}
@@ -96,7 +98,7 @@ const Signin = () => {
       </Link>
       <p className='text-body-secondary text-white text-base'>
         Not a member yet?{' '}
-        <Link href='/' className='text-primary hover:underline'>
+        <Link href='/signup' className='text-primary hover:underline'>
           Sign Up
         </Link>
       </p>

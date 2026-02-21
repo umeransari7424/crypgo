@@ -21,7 +21,7 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-export function getPostBySlug(slug: string, fields: string[] = []) {  
+export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.mdx$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -32,7 +32,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   //   [key: string]: string | object;
   // };
 
-const items: Post = {};
+  const items: Post = {};
   function processImages(content: string) {
     // You can modify this function to handle image processing
     // For example, replace image paths with actual HTML image tags
@@ -68,8 +68,7 @@ export function getAllPosts(fields: string[] = []) {
     .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order
     .sort((post1, post2) =>
-  String(post1.date ?? "") > String(post2.date ?? "") ? -1 : 1
-);
-
+      String(post1.date ?? "") > String(post2.date ?? "") ? -1 : 1
+    );
   return posts;
 }

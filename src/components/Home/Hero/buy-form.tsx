@@ -69,6 +69,7 @@ const BuyCrypto = () => {
     toast.success('Crypto purchase successful!')
     setFormData((prevData) => ({ ...prevData, amount: '' }))
   } catch (error) {
+    console.log(error)
     toast.error('An error occurred during the purchase.')
   } finally {
     setLoading(false)
