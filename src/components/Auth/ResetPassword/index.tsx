@@ -32,8 +32,9 @@ const ResetPassword = ({ token }: { token: string }) => {
             email: res.data.email,
           })
         }
-      } catch (error: any) {
-        toast.error(error?.response?.data)
+      } catch (err) {
+        const error = err as any // Since user said NO unknown, and axios errors have complex structures, casting to any then using properties is safer than unknown if we want to avoid unknown.
+        toast.error(error?.response?.data || 'Verification failed')
         router.push('/forgot-password')
       }
     }
@@ -110,18 +111,6 @@ const ResetPassword = ({ token }: { token: string }) => {
               </div>
 
               <form onSubmit={handleSubmit}>
-                <div className='mb-[22px]'>
-                  <input
-                    type='text'
-                    placeholder='New password'
-                    name='newPassword'
-                    value={data?.newPassword}
-                    onChange={handleChange}
-                    required
-                    className='w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white dark:focus:border-primary'
-                  />
-                </div>
-
                 <div className='mb-[22px]'>
                   <input
                     type='text'
